@@ -2,6 +2,7 @@
 namespace App\Shell;
 
 use Cake\Console\Shell;
+use Cake\Log\Log;
 
 /**
  * Users shell command.
@@ -21,38 +22,15 @@ class UsersShell extends Shell
             return $this->abort('Please enter a username.');
         }
         $user = $this->Users->findByUsername($this->args[0])->first();
-        if ($user) {
+        if ($user)
+        {
+            Log::write('debug', "Welcome to ". $user->name);
             $this->out("Welcome to ". $user->name);
-        } else {
+
+        } else
+        {
+            Log::write('debug', 'User cannot be found');
             $this->abort('User cannot be found', 128);
         }
-
-        // Get arbitrary text from the user.
-        $color = $this->in('What color do you like?');
-
-        // Write to stdout
-        $this->out('Normal message');
-
-        // Write to stderr
-        $this->err('Error message');
-
-        // Write to stderr and raise a stop exception
-        $this->abort('Fatal error');
-
-
-        // Output 2 newlines
-        $this->out($this->nl(2));
-
-        // Clear the user's screen
-        $this->clear();
-
-        // Draw a horizontal line
-        $this->hr();
-    }
-
-    // another shell function
-    public function heyThere($name = 'Anonymous')
-    {
-        $this->out('Hey there ' . $name);
     }
 }
