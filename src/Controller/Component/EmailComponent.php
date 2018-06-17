@@ -11,23 +11,23 @@ require ROOT. '/vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require ROOT. '/vendor/phpmailer/phpmailer/src/SMTP.php';
 
 class EmailComponent extends Component {
- 
+
     public function send_mail($to, $subject, $message)
     {
         // date_default_timezone_set('Asia/Calcutta');
 
-        $sender = "XXX"; // this will be overwritten by GMail
+        $sender = "xxx@gmail.com"; // this will be overwritten by GMail
 
         $header = "X-Mailer: PHP/".phpversion() . "Return-Path: $sender";
 
         $mail = new PHPMailer();
 
-        $mail->SMTPDebug  = 0; // turn it off in production
+        $mail->SMTPDebug  = 2; // turn it off in production
         $mail->IsSMTP();
         $mail->Host = "smtp.gmail.com"; 
         $mail->SMTPAuth = true;
-        $mail->Username   = "XXX";  
-        $mail->Password   = "XXX";
+        $mail->Username   = "xxx@gmail.com";  
+        $mail->Password   = "GMAIL_PASSWORD";
         $mail->SMTPSecure = "tls"; // ssl and tls
         $mail->Port = 587; // 465 and 587
 

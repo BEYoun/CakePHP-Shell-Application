@@ -4,6 +4,10 @@ namespace App\Shell;
 use Cake\Console\Shell;
 use Cake\Log\Log;
 
+use Cake\Controller\Component;
+use Cake\Controller\ComponentRegistry;
+use App\Controller\Component\EmailComponent;
+
 /**
  * Users shell command.
  */
@@ -13,6 +17,9 @@ class UsersShell extends Shell
     {
         parent::initialize();
         $this->loadModel('Users');
+
+        // Load Component
+        $this->Email = new EmailComponent(new ComponentRegistry());
     }
 
     public function main()
@@ -31,6 +38,23 @@ class UsersShell extends Shell
         {
             Log::write('debug', 'User cannot be found');
             $this->abort('User cannot be found', 128);
+        }
+    }
+
+    /**
+     * Send Mail with shell command
+     */
+    public function mail()
+    {
+        $to = 'jeevan15498@gmail.com';
+        $subject = 'Hi buddy, i got a message for you.';
+        $message = 'Nothing much. Just test out my Email Component using PHPMailer.';
+        
+        $mail = $this->Email->send_mail($to, $subject, $message);
+        if ($mail) {
+            $this->out("Mail Successfully Sent For :: ". $to);
+        } else {
+            $this->out("Mail Error.");
         }
     }
 }
