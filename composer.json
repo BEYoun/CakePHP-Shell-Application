@@ -1,6 +1,6 @@
 {
-    "name": "cakephp/app",
-    "description": "CakePHP skeleton app",
+    "name": "ctechhindi/cakephp-shell-project",
+    "description": "CakePHP Shell Demo Application",
     "homepage": "https://cakephp.org",
     "type": "project",
     "license": "MIT",
